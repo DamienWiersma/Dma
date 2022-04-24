@@ -13,8 +13,8 @@ import theme from "../../../theme";
 const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("window").height;
 export default class Signup extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",

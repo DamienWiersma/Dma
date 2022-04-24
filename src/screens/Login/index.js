@@ -13,12 +13,17 @@ import theme from "../../../theme";
 const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("window").height;
 export default class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
     };
+  }
+
+  loginFn = () => {
+    //Check logica
+    this.props.setAuthorized()
   }
   render() {
     let { email, password } = this.state;
@@ -54,7 +59,7 @@ export default class Login extends React.Component {
 
           <TouchableOpacity
             style={styles._btn}
-            onPress={() => this.props.navigation.navigate("Home")}
+            onPress={this.loginFn}
           >
             <Text style={styles._btn_text}>Sign in</Text>
           </TouchableOpacity>
