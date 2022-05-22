@@ -13,6 +13,13 @@ import {
     News,
     Login,
     Signup,
+    bas,
+    drum,
+    gitaar,
+    production,
+    songwriting,
+    dmaApplication,
+    
 
 } from "./../screens";
 import {AntDesign, FontAwesome} from "@expo/vector-icons";

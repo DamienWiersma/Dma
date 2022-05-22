@@ -16,14 +16,34 @@ export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      voornaam: "",
+      achternaam: "",
       email: "",
       password: "",
       address: "",
       phone: "",
     };
   }
+
+  register = async () => {
+    const response = await fetch(`http://192.168.2.29:3000/api/users`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: this.state.email, password: this.state.password, adres: this.state.address, phoneNumber: this.state.phone, voornaam: this.state.voornaam, achternaam: this.state.achternaam,})
+    });
+    if (!response.ok) {
+      //errror handling
+      return;
+    } else {
+      this.props.navigation.navigate("Home")
+    }
+  
+  }
   render() {
-    let { email, password, address, phone } = this.state;
+    let { email, password, address, phone, voornaam, achternaam } = this.state;
     return (
       <View style={styles._container}>
         <ScrollView>
@@ -37,6 +57,18 @@ export default class Signup extends React.Component {
           </View>
 
           <Text style={styles._title}>Welkom!</Text>
+          <TextInput
+            style={styles._text_field}
+            placeholder="voornaam"
+            value={voornaam}
+            onChangeText={(e) => this.setState({ voornaam: e })}
+          />
+          <TextInput
+            style={styles._text_field}
+            placeholder="achternaam"
+            value={achternaam}
+            onChangeText={(e) => this.setState({ achternaam: e })}
+          />
           <TextInput
             style={styles._text_field}
             placeholder="Email"
@@ -69,13 +101,13 @@ export default class Signup extends React.Component {
 
           <TouchableOpacity
             style={styles._btn}
-            onPress={() => this.props.navigation.navigate("Home")}
+            onPress={this.register}
           >
             <Text style={styles._btn_text}>Signup</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles._footer}
-            onPress={() => this.props.navigation.navigate("Login")}
+            onPress={() => this.props.navigation.navigate("Home")}
           >
             <Text style={styles._newuser}>Already have an account? Login!</Text>
           </TouchableOpacity>

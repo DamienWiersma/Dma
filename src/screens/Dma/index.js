@@ -11,37 +11,38 @@ import Login from "../Login";
 
 function Dma(props) {
     const [authorized, setAuthorized] = useState(false);
+    const [userData, setUserData] = useState()
     const list = [
         {
             title: "Zang",
             url: require("./../../../assets/2.png"),
-            route: "Kaas"
+            route: "Zang"
         },
         {
             title: "Bass",
             url: require("./../../../assets/1.png"),
-            route: "Kaas"
+            route: "bass"
         },
         {
             title: "Drum",
             url: require("./../../../assets/4.png"),
-            route: "Kaas"
+            route: "Drum"
         },
         {
             title: "Gittar",
             url: require("./../../../assets/3.png"),
-            route: "Kaas"
+            route: "gittar"
         },
 
         {
             title: "Production",
             url: require("./../../../assets/7.png"),
-            route: "Kaas"
+            route: "Production"
         },
         {
             title: "Toetsen",
             url: require("./../../../assets/5.png"),
-            route: "Kaas"
+            route: "Toetsen"
         },
         {
             title: "Writing/Theorie",
@@ -77,7 +78,10 @@ function Dma(props) {
                 </View>
             </ScrollView>
         </View>
-    ) : <Login setAuthorized={() => setAuthorized(true)} {...props}/>
+    ) : <Login setAuthorized={(data) => {
+        setAuthorized(true)
+        setUserData(data.user)
+        }} {...props}/>
 }
 
 

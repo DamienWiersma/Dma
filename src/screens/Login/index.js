@@ -21,9 +21,21 @@ export default class Login extends React.Component {
     };
   }
 
-  loginFn = () => {
-    //Check logica
-    this.props.setAuthorized()
+  loginFn = async () => {
+    const response = await fetch(`http://192.168.2.29:3000/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({email: this.state.email, password: this.state.password})
+    });
+    if (!response.ok) {
+      //Show error and user is not authorized
+      return;
+    }
+    const responseBody = await response.json();
+    this.props.setAuthorized(responseBody)
   }
   render() {
     let { email, password } = this.state;
@@ -81,10 +93,10 @@ let styles = StyleSheet.create({
     
   },
   _header: {
-    height: 305,
+    height: 250,
     backgroundColor: theme.primary,
-    borderBottomLeftRadius: 200,
-    borderBottomRightRadius: 200,
+    borderBottomLeftRadius: 190,
+    borderBottomRightRadius: 190,
     width: windowWidth + 30,
     alignSelf: "center",
     justifyContent: "center",
@@ -122,8 +134,8 @@ let styles = StyleSheet.create({
     padding: 15,
   },
   _circle: {
-    height: 200,
-    width: 200,
+    height: 175,
+    width: 175,
     borderRadius: 100,
     backgroundColor: theme.white,
     justifyContent: "center",
